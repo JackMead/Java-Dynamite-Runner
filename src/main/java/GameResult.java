@@ -4,6 +4,13 @@ public class GameResult {
     private String playerOneName;
     private String playerTwoName;
 
+    public GameResult(int playerOneScore, int playerTwoScore, String playerOneName, String playerTwoName) {
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
+        this.playerOneScore = playerOneScore;
+        this.playerTwoScore = playerTwoScore;
+    }
+
     public int getPlayerOneScore() {
         return playerOneScore;
     }

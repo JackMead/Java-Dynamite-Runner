@@ -24,9 +24,10 @@ public class GameRunner {
     private int currentDrawStreak = 0;
 
     public GameResult RunGame(Bot playerOne, Bot playerTwo) {
+        resetGame();
+
         String playerOneName = playerOne.getClass().getSimpleName();
         String playerTwoName = playerTwo.getClass().getSimpleName();
-
 
         while (!gameOver()) {
             Move playerOneMove = getMove(playerOne, playerOneRounds);
@@ -46,12 +47,7 @@ public class GameRunner {
                 break;
             }
 
-            if(playerOneMove == Move.D){
-                playerOneDynamite++;
-            }
-            if(playerTwoMove == Move.D){
-                playerTwoDynamite++;
-            }
+            updateDynamiteUsage(playerOneMove, playerTwoMove);
 
             if(playerOneDynamite > DYNAMITE_LIMIT){
                 System.out.println(String.format("%s exceeded the dynamite limit and lost", playerOneName));
@@ -69,14 +65,7 @@ public class GameRunner {
             updatePoints(result);
         }
 
-        GameResult result = new GameResult();
-        result.setPlayerOneScore(playerOneScore);
-        result.setPlayerTwoScore(playerTwoScore);
-        result.setPlayerOneName(playerOneName);
-        result.setPlayerTwoName(playerTwoName);
-
-        resetGame();
-        return result;
+        return new GameResult(playerOneScore, playerTwoScore, playerOneName, playerTwoName);
     }
 
     private void resetGame(){
@@ -136,6 +125,15 @@ public class GameRunner {
 
         boolean p1Wins = playerTwoMove == Move.W || playerTwoMove == Move.R;
         return p1Wins ? Result.PLAYER_ONE_WIN : Result.PLAYER_TWO_WIN;
+    }
+
+    private void updateDynamiteUsage(Move playerOneMove, Move playerTwoMove){
+        if(playerOneMove == Move.D){
+            playerOneDynamite++;
+        }
+        if(playerTwoMove == Move.D){
+            playerTwoDynamite++;
+        }
     }
 
     private void updatePoints(Result result){

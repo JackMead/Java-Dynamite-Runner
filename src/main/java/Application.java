@@ -12,7 +12,6 @@ public class Application {
     }
 
     public void Run() {
-
         RunGameBetween(new YourBot(), new RockBot());
 
         RunGameBetween(new YourBot(), new RandomBot());
@@ -38,9 +37,9 @@ public class Application {
             return;
         }
 
-        String winnerName = gameResult.getPlayerOneScore() > gameResult.getPlayerTwoScore() ?
-                gameResult.getPlayerOneName() :
-                gameResult.getPlayerTwoName();
+        String winnerName = gameResult.getPlayerOneScore() > gameResult.getPlayerTwoScore()
+                ? gameResult.getPlayerOneName()
+                : gameResult.getPlayerTwoName();
         System.out.println(String.format("*** Winner: %s ***", winnerName));
 
     }
