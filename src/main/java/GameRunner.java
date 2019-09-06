@@ -29,7 +29,7 @@ public class GameRunner {
         String playerOneName = playerOne.getClass().getSimpleName();
         String playerTwoName = playerTwo.getClass().getSimpleName();
 
-        while (!gameOver()) {
+        while (!isGameOver()) {
             Move playerOneMove = getMove(playerOne, playerOneRounds);
             Move playerTwoMove = getMove(playerTwo, playerTwoRounds);
 
@@ -78,7 +78,7 @@ public class GameRunner {
         currentDrawStreak = 0;
     }
 
-    private boolean gameOver(){
+    private boolean isGameOver(){
         return playerOneScore >= WINNING_SCORE || playerTwoScore >= WINNING_SCORE || currentDrawStreak >= WINNING_SCORE;
     }
 
